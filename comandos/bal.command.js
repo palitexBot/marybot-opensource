@@ -17,8 +17,9 @@ async function run(client,message,args){
             return message.reply("Primeira vez que te vejo use o comando novamente para eu poder te conhecer")
         }
         message.reply("Parece mentira e é kkk(to fazendo o cmd ainda)")
-       db.ref(`perfil/${message.user.id}/economia/status`).
-      })
+       db.ref(`perfil/${message.user.id}/economia/status`).once("value").then(lol=>{
+           if(!lol) return eval(`message.reply('Peça pra ${}`);
+       })      })
       
     
 }
