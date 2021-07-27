@@ -6,7 +6,7 @@
 - site: https://mary.blacklight.net.br
 - discord: https://loja.blacklight.net.br/discord
 - adicione a mary: https://mary.blacklight.net.br/api/invite
-
+- top.gg: https://mary.blacklight.net.br/api/topgg
 ### Você pode copiar o codigo!
 - olha que legal! Você tendo sua própia mary!
 - no seu .env bote:
