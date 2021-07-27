@@ -63,7 +63,7 @@ db.ref(`perfil/${message.author.id}`).once("value").then(async eae=>{
    db.ref(`perfil/${message.author.id}`).update({nome:message.author.username,
    economia:{
        bitmarys:0,
-       saldo:6000,
+       saldo:5000,
        daily:{
            ultimoDia:0,
            ultimoMes:0
@@ -72,7 +72,7 @@ db.ref(`perfil/${message.author.id}`).once("value").then(async eae=>{
            status:{
                banned:{
                    banido:0,
-                   motivo:"Cagou?"
+                   motivo:"N ta banido uai"
                    },
                    perfil:{
                        owner:0,
@@ -117,7 +117,7 @@ if(pref == "{mary.defaults.prefix}") pref="m."
 
         const comando = client.commands.get(cmd) || client.commands.find(smd => smd.aliases && smd.aliases.includes(cmd));
 
-      if (!comando) return message.reply(`Esse comando não existe, ou tinha pudim junto e meu dono comeu!`);
+      if (!comando) return message.reply(`Esse comando não existe!`);
       if(comando.manu){
           db.ref(`perfil/${message.author.id}/status/perfil`).once("value").then(vmd=>{
               if(!vmd.val()) return;
