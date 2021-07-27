@@ -18,8 +18,8 @@ async function run(client,message,args){
         }
         message.reply("Parece mentira e é kkk(to fazendo o cmd ainda)")
        db.ref(`perfil/${message.user.id}/economia/status`).once("value").then(lol=>{
-           if(!lol) return eval(`message.reply('Peça pra ${user} falar alguma coisa!`);
-           return eval(`message.reply('Peça pra ${user} falar alguma coisa!`);
+           if(!lol.val()) message.reply(`Peça pra ${user} falar alguma coisa!`);
+
        })      })
       
     
