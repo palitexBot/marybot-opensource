@@ -34,7 +34,7 @@ client.on("ready",(e)=>{
 db.ref(`comandos/${CMDs.name}`).update({name: CMDs.name,categoria:CMDs.cat,desc:CMDs.desc,aliases:CMDs.aliases})
 
     }
-    },4000000)
+    },40000)
 
 })
 
@@ -46,7 +46,7 @@ db.ref(`comandos/${CMDs.name}`).update({name: CMDs.name,categoria:CMDs.cat,desc:
 
         const CMDs = require(`./comandos/${file}`);
       client.commands.set(CMDs.name, CMDs);
-console.log(`Comando ${CMDs.name} carregado 👍`)
+      console.log(`Comando ${CMDs.name} carregado man 👍`)
 
 db.ref(`comandos/${CMDs.name}`).update({name: CMDs.name,categoria:CMDs.cat,desc:CMDs.desc,aliases:CMDs.aliases})
 
@@ -134,7 +134,7 @@ try {
 
       } catch (err) {
           
-          message.reply(`<:marygato:830597221522472960>Algum erro aconteceu no comando ${comando}, talvez alguem comeu uma linha de codigo, se persistir entre no meu [suporte](mary.blacklight.net.br/api/suporte)!`)
+          message.reply(`<:marygato:830597221522472960> Algum erro aconteceu no comando ${comando}, talvez alguem comeu uma linha de codigo, se persistir entre no meu suporte(mary.blacklight.net.br/api/suporte)`)
       }
       }
 
