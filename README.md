@@ -12,3 +12,6 @@
 - no seu .env bote:
 <p>TOKEN=(token da sua bot)</p>
 - e bote as configs da firebase que você consegue em: https://console.firebase.google.com
+
+
+### o Dono do github é o doutor estranho mas o criador é o C0dezin
