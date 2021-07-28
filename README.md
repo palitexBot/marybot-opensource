@@ -7,6 +7,7 @@
 - discord: https://loja.blacklight.net.br/discord
 - adicione a mary: https://mary.blacklight.net.br/api/invite
 - top.gg: https://mary.blacklight.net.br/api/topgg
+- tutoriais: https://www.youtube.com/channel/UC15H-MH9D6KKJFRSLTH63_g
 ### Você pode copiar o codigo!
 - olha que legal! Você tendo sua própia mary!
 - no seu .env bote:
@@ -14,4 +15,4 @@
 - e bote as configs da firebase que você consegue em: https://console.firebase.google.com
 
 
-### O Dono do github é o doutor estranho mas o criador é o C0dezin
+### O Dono do github é o doutor estranho mas o criador é o [C0dezin](https://github.com/C0dezin)
