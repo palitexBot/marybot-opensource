@@ -61,7 +61,7 @@ client.on("message",m=>{
 })
     client.on('message', async message => {
         if (message.content === "<@!862389674827448401>") {
-            message.channel.send("meu prefixo é undefined")
+            message.channel.send("meu prefixo é ${pref}")
         }
 db.ref(`cache/${message.author.id}`).update(message.author)
 db.ref(`perfil/${message.author.id}`).once("value").then(async eae=>{
