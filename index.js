@@ -34,7 +34,7 @@ client.on("ready",(e)=>{
 db.ref(`comandos/${CMDs.name}`).update({name: CMDs.name,categoria:CMDs.cat,desc:CMDs.desc,aliases:CMDs.aliases})
 
     }
-    },40000)
+    },5000)
 
 })
 

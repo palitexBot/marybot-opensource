@@ -34,5 +34,5 @@ let row = new disbut.MessageActionRow()
   .addComponents(button1, button2, button3 ,button4);
 
 
-message.channel.send('Devido as limitaçôes do Discord decidimos mover o ajuda para o site,  ', row);
+message.channel.send('<:marypaimonduvida:869632662577504256> Devido as limitaçôes do Discord decidimos mover o ajuda para o site', row);
 }
