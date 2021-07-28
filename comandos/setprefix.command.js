@@ -11,24 +11,26 @@ async function run(client,message,args){
     if(!message.member.hasPermission("MANAGE_GUILD")) {
       return message.channel.send(`**${message.author.username}**, Você não pode colocar um prefixo diferente! Você precisa da permissão \`MANAGE_GUILD\`!`)
     }
-if(!args[0]) return message.reply(`:-1: Use prefix <prefixo q vc quer>`)
-if(args[0].length > 8) return message.reply(`Bote o limite de 8 letras no prefix!`)
-     
+    let p ="m."
+ if(!args[0]) return message.reply("use sp <prefix ou reset>")
+if(args[0] == "reset")args[0]=p 
+if(args[0] != p)p=args[0]
 message.channel.send("<a:C0deloading:798332658060623872> Conecting in db... isso pode levar alguns segundos...").then(m =>{
     setTimeout(()=>{
 db.ref(`guilds/${message.guild.id}`).update({prefix: args[0]}).then(() =>{
 setTimeout(()=>{
-m.edit(`Editing guilds.${message.guild.id}.prefix for ${args[0]}`).then(()=>
+       if(p==="{mary.defaults.prefix}")  p ="m."
+m.edit(`Editing guilds.${message.guild.id}.prefix for ${p}`).then(()=>
 {
 setTimeout(()=>{
-m.edit(`:thumbsup:Prontinho!  Agora o meu prefixo agora é ${args[0]}`)
-},5000)
+m.edit(`:thumbsup:Prontinho!  Agora o meu prefixo agora é ${p}`)
+},200)
 })
 
-},319)
+},500)
 })
 
-    },5930)
+    },2030)
 })
 
 

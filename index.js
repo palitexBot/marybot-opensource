@@ -60,8 +60,13 @@ client.on("message",m=>{
     
 })
     client.on('message', async message => {
-        if (message.content === "<@!862389674827448401>") {
-            message.channel.send("meu prefixo é ${pref}")
+        if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@${client.user.id}>`)) {
+                let a = await db.ref(`guilds/${message.guild.id}`).once("value")
+                
+                if(!a.val())return;
+                let aa=a.val().prefix
+                if(aa == "{mary.defaults.prefix}") aa="m."
+            message.channel.send("meu prefixo no "+message.guild.name+" é `"+aa+"` use "+aa+"ajuda para ajuda")
         }
 db.ref(`cache/${message.author.id}`).update(message.author)
 db.ref(`perfil/${message.author.id}`).once("value").then(async eae=>{
