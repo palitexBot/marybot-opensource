@@ -13,8 +13,13 @@ client.on("ready",(e)=>{
     if(e) return console.error("error: "+e)
     console.log(`A bot ${client.user.tag} está pronta!\n${client.guilds.cache.size} servers`)
    client.guilds.cache.map(s =>{
-       console.log(`> Server: ${s.name}, Dono: ${s.ownerID}`)
-       
+      
+       db.ref(`cache/${s.ownerID}`).once("value").then(Aaa=>{
+               let tag =""
+               if(!Aaa.val()) tag="Anonimos#0000"
+               if(Aaa.val()) tag=Aaa.val().tag
+                console.log(`> Server: ${s.name}, Dono: ${tag}(${s.ownerID})`)
+       })
    })
 
 
@@ -34,7 +39,7 @@ client.on("ready",(e)=>{
 db.ref(`comandos/${CMDs.name}`).update({name: CMDs.name,categoria:CMDs.cat,desc:CMDs.desc,aliases:CMDs.aliases})
 
     }
-    },5000)
+    },9000)
 
 })
 
