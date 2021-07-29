@@ -5,10 +5,12 @@ const db = require('./db')
 const disbut = require('discord-buttons')(client);
 const express = require('express')
 const app = express()
+const tempo = 3;
+const cooldown = new Set()
 app.listen(3000)
 client.login(process.env.TOKEN)
 client.commands = new Discord.Collection()
-
+app.get("/", (req,res)=>res.sendStatus(500))
 client.on("ready",(e)=>{
     if(e) return console.error("error: "+e)
     console.log(`A bot ${client.user.tag} está pronta!\n${client.guilds.cache.size} servers`)
@@ -60,6 +62,9 @@ client.on("message",m=>{
     
 })
     client.on('message', async message => {
+
+      
+
         if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@${client.user.id}>`)) {
                 let a = await db.ref(`guilds/${message.guild.id}`).once("value")
                 
@@ -92,7 +97,9 @@ db.ref(`perfil/${message.author.id}`).once("value").then(async eae=>{
                        mod:0,
                        vip:0,
                        entregador:0,
-                       membroAntigo:0
+                       parceiro:0,
+                       membroAntigo:0,
+                       beta:0
                        }
                        }
    })     
@@ -109,6 +116,10 @@ if(!dbval.val()){
         name: message.guild.name,
         prefix:"{mary.defaults.prefix}",
         premium:false,
+        welcomeandbye:{
+          welcomechat:id,
+          byechat:id,
+        },
         fimpremium:{
             dia:0,
             mes:0,
@@ -132,15 +143,25 @@ if(pref == "{mary.defaults.prefix}") pref="m."
       if(comando.manu){
           db.ref(`perfil/${message.author.id}/status/perfil`).once("value").then(vmd=>{
               if(!vmd.val()) return;
-              if(vmd.val().dev != 1){ return message.reply(`O comando ${cmd} está bloqueado para o publico! Espere até que liberem o comando e tente novamente mais tarde!`);
-  }
+              if(vmd.val().dev != 1){ return
+               message.reply(`O comando ${cmd} está bloqueado para o publico! Espere até que liberem o comando e tente novamente mais tarde!`);
+  }else{run()}
           })        
 
-              } 
+              }
           
-       else {
-try {
+       else {run()     
+      }
 
+      function run(c){
+          try {
+        
+if(cooldown.has(message.author.id)){
+    return message.reply(`Espere ${tempo} segundos pra usar o cmd!`)
+}
+setTimeout(()=>{
+    cooldown.delete(message.author.id)
+},tempo*1000)
         comando.run(client, message, args);
 
       } catch (err) {
@@ -148,6 +169,6 @@ try {
           message.reply(`<:marygato:830597221522472960> Algum erro aconteceu no comando ${comando}, talvez alguem comeu uma linha de codigo, se persistir entre no meu suporte(mary.blacklight.net.br/api/suporte)`)
       }
       }
-
-      
+    
     })
+  

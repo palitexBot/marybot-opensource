@@ -29,9 +29,15 @@ let button4 = new disbut.MessageButton()
   //o style é oq ele é, n tem id
   .setURL('https://mary.blacklight.net.br/api/suporte') 
   .setLabel('Suporte❓'); 
+
+  let button5 = new disbut.MessageButton()
+  .setStyle('url')// eu sei
+  //o style é oq ele é, n tem id
+  .setURL('https://mary.blacklight.net.br/api/invite') 
+  .setLabel('Me adicone💎'); 
  
 let row = new disbut.MessageActionRow()
-  .addComponents(button1, button2, button3 ,button4);
+  .addComponents(button1, button2, button3 ,button4, button5);
 
 
 message.channel.send('<:marypaimonduvida:869632662577504256> Devido as limitaçôes do Discord decidimos mover o ajuda para o site', row);
