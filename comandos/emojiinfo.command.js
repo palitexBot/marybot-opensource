@@ -1,33 +1,29 @@
-const { MessageEmbed } = require("discord.js")
-const { utc } = require("moment")
-
+const Discord = require('discord.js')
+const moment = require('moment')
+moment.locale("pt-BR");
 module.exports = {
-name:"emojiinfo",
-desc: "veja as info de um emoji",
-cat:"div",
-manu:false,
-aliases:["ei"],
-run:run
-}
-async function run(client,message,args){
-        const EMOJI_REGEX = /:[^:\s]*(?:::[^:\s]*)*:/ 
+    name: "emojiinfo",
+    async run(client, message, args) {
+        let emojiName = args.join(" ");
+        let emoji = message.guild.emojis.cache.get(args[0]) || message.guild.emojis.cache.find(emoji => emoji.name === `${emojiName}`) 
+        if (!args[0]) return message.channel.send("Por favor, me dê o nome ou id do emoji")
+        if (!emoji) return message.channel.send("Por favor, me dê um nome ou id **valido**")
+        let xd;
+        if(emoji.animated) xd = "Sim"
+        if(!emoji.animated) xd = 'Não'
+        let embed = new Discord.MessageEmbed()
 
-        if(!EMOJI_REGEX.test(args[0])) {
-            return message.channel.send(`Isso não é um emoji!`)
-        } else {
-            const emoji = args[0].trim().split(':')[2].slice(0, 18)
+            .addField("Nome", `${emoji.name}`)
+            .addField("Id do emoji", `${emoji.id}`)
+            .addField("Emoji", `${emoji}`)
+            .addField("Criado em", `${moment(emoji.createdTimestamp).format('LT')} ${moment(emoji.createdTimestamp).format('LL')} ${moment(emoji.createdTimestamp).fromNow()}`)
+            .addField("Servidor", message.guild.name)
+            .addField("Animado?", xd)
+            .setThumbnail(emoji.url)
+            .setColor("0edceb")
+            .addField("Formato", `\`<:${emoji.name}:${emoji.id}>\``)
+            .addField("URL", `[clique aqui](${emoji.url})`)
 
-            const emojis = client.emojis.cache.find(emoje => emoje.id == emoji)
-if(!emojis) return message.channel.send(`Isso não é um emoji!`)
-            const embed = new MessageEmbed()
-            .setTitle(`Informações do emoji: ${emojis.name}`)
-            .setThumbnail(emojis.url)
-            .addField(`É animado ?`, emojis.animated ? 'Sim' : 'Não')
-            .addField(`Link: `, `[Clique aqui](${emojis.url})`) 
-            .addField(`Criado dia: `, utc(emojis.createdAt).format('LL'))
-            .addField(`ID do emoji: `, `\`${emojis.id}\``)
-            .addField(`Servidor que o emoji se encontra: `, emojis.guild.name)
-            message.channel.send(embed)
-        } 
+        message.channel.send(embed)
     }
-    
+}

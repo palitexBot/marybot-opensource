@@ -8,16 +8,21 @@ aliases:["help","aj","?","mary.commands"],
 run:run
 }
 async function run(client,message,args){
-  const discord = require('discord.js')
+  const Discord = require('discord.js')
   const disbut = require('discord-buttons')
-
+const embed = new Discord.MessageEmbed()
+    .setColor('0edceb')
+    .setTitle('Ajuda')
+    .setDescription('<:marypaimonduvida:869632662577504256> Devido as limitaçôes do Discord decidimos mover o ajuda para o site')
+    .setTimestamp()
+    .setFooter(`Comando executado por ${message.author.username}`, message.author.avatarURL());
         let button1 = new disbut.MessageButton()
   .setStyle('url')
   .setURL('https://mary.blacklight.net.br/comandos.mcat') 
   .setLabel('Comandos🤖'); 
   let button2 = new disbut.MessageButton()
   .setStyle('url')
-  .setURL('https://mary.blacklight.net.br') 
+  .setURL('enc.blacklight.net.br/mw') 
   .setLabel('Meu site!'); 
 
   let button3 = new disbut.MessageButton()
@@ -40,5 +45,5 @@ let row = new disbut.MessageActionRow()
   .addComponents(button1, button2, button3 ,button4, button5);
 
 
-message.channel.send('<:marypaimonduvida:869632662577504256> Devido as limitaçôes do Discord decidimos mover o ajuda para o site', row);
+message.channel.send(embed, row);
 }

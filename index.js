@@ -9,29 +9,30 @@ const { AutoPoster } = require('topgg-autoposter')
 const fetch = require('node-fetch')
 let cmds = []
 let status = {}
+
 setTimeout(()=>{
 uptime(10000)
 }),1000
 setTimeout(()=>{
-const poster = AutoPoster(process.env.topggtoken, client) // your discord.js or eris client
+const poster = AutoPoster(process.env.topggtoken, client) // Seu cliente discord.js
 const { Topgg } = require("topgg-votes");
 client.topgg = new Topgg({
-    token: process.env.topggtoken, // Your top.gg token
-    port: 22565, // Your host port
-    auth: "zazmary" // Webhook password
+    token: process.env.topggtoken, // Seu token do to.gg
+    port: 22565, // Sua porta de host
+    auth: "zazmary" // Senha do webhook
 })
 
 client.topgg.postWebhook(client);
 
-// Event for vote notifications
+// Evento para notificações de voto no top.gg
 client.on("newVote", (user, bot, isWeekend, query) => {
-    console.log(`${user} has voted!`)
+    console.log(`${user} votou!`)
 })
 setTimeout(()=>{
-// optional
+// Opicional
 poster.on('posted', (stats) => { // ran when succesfully posted
 //console.dir(stats)
-  console.log(`Posted stats to Top.gg | ${stats.serverCount} servers`)
+  console.log(`Status postado para Top.gg | ${stats.serverCount} servers`)
   }),6000
 
 })
@@ -61,6 +62,9 @@ client.on("ready",(e)=>{
 
 
 })
+client.on("guildDelete", guild => {
+  console.log("sai de uma guild" ${guild.id}))
+}
 client.on("ready",async(e)=>{
 
 setInterval(async()=>{
@@ -125,7 +129,7 @@ const tempo = 3;
 const cooldown = new Set()
   client.on("message",async message =>{
       
-
+if(message.webhookID)return;
         if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@${client.user.id}>`)) {
                 let a = await db.ref(`guilds/${message.guild.id}`).once("value")
                 
@@ -177,11 +181,13 @@ if(!dbval.val()){
         name: message.guild.name,
         prefix:"{mary.defaults.prefix}",
         premium:false,
+        linguagem:"{mary.defautls.language}",
         fimpremium:{
             dia:0,
             mes:0,
             ano:0
         }
+        
     })
     return;
 
@@ -254,6 +260,26 @@ return client.api.interactions(interaction.id,interaction.token).callback.post({
     })
     if(command =="saldo"){// aqui aparece command=="saldo" se for saldo executa
    let cmd = require("./slashs/saldo")
+   cmd(interaction,args,db,client)
+    }
+    if(command =="xp"){// aqui aparece command=="saldo" se for saldo executa
+   let cmd = require("./slashs/xp")
+   cmd(interaction,args,db,client)
+    }
+    if(command =="pay"){// aqui aparece command=="saldo" se for saldo executa
+   let cmd = require("./slashs/pay")
+   cmd(interaction,args,db,client)
+    }
+    if(command =="maryban"){// aqui aparece command=="saldo" se for saldo executa
+   let cmd = require("./slashs/maryban")
+   cmd(interaction,args,db,client)
+    }
+    if(command =="agentedeelite"){// aqui aparece command=="saldo" se for saldo executa
+   let cmd = require("./slashs/atengedeelite")
+   cmd(interaction,args,db,client)
+    }
+    if(command =="perfil"){// aqui aparece command=="saldo" se for saldo executa
+   let cmd = require("./slashs/perfil")
    cmd(interaction,args,db,client)
     }
   })

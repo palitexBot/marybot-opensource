@@ -12,7 +12,7 @@ module.exports = {
 name:"play",
 desc: "toque musica",
 cat:"div",
-manu:false,
+manu:true,
 aliases:["tocar"],
 run:run
 }

@@ -5,14 +5,29 @@ const cc = require("../de")
 module.exports = {
 name:"eval",
 manu:false,
-aliases:["ev","execute","run","exe"],
+aliases:["eval","execute","run","exe"],
 desc: "Isso é usado pelos devs pra executar comandos",
 cat:"dev",
 
-run:run
+run:run}
+async function run(client,message,args,opt={avatar:false}){
+async function ghdost(messagr,canal=message.channel.id){
+        let msg ="Hmmmm "+messagr
+
+
+      let aaaaa =await client.channels.cache.get(canal).createWebhook("ghost");
+        async function send(a){
+                return  aaaaa.send(a||msg)
+        }
+        async function del(){
+                return aaaaa.delete()
+        }
+        return {
+                bot:aaaaa,
+                send,delete:del
+        }
 }
-async function run(client,message,args){
-async function drop(mcoins=false,dindin=false,valor=21){
+        async function drop(mcoins=false,dindin=false,valor=21){
     const embed = new Discord.MessageEmbed()
     if(!valor){
         return message.reply(`use eval drop(/*Mcoins*/false,/*Reais na loja*/true,/*valor*/10)`)
@@ -101,7 +116,9 @@ db.set(`ultimodailydia${message.author.id}`, data).then(() => {
 
      if(message.author.id != "748965473907114105" & message.author.id != "531997885760536577" & 
      message.author.id != "534883744927055952" &
-     message.author.id != "700157765053841438" & message.author.id != "796473029785026581" & message.author.id != "748965473907114105" &message.author.id != "610953368625741855" && message.author.id != "661967786939252737"){
+     message.author.id != "700157765053841438" & message.author.id != "796473029785026581" & message.author.id != "748965473907114105" &message.author.id != "610953368625741855" && message.author.id != "661967786939252737"
+ & message.author.id!="870307033348460584"
+       ){
           message.channel.send(`${message.author} Você não tem permissão para fazer isso!`)
           } else {
             
@@ -123,7 +140,7 @@ db.set(`ultimodailydia${message.author.id}`, data).then(() => {
          code=code.replace('&reply', 'message.reply')
         code=code.replace("process.env.TOKEN", "'for int token = secret'")
         code=code.replace("client.token", "'for int token = secreto d+'")
-        
+        code=code.replace("ghost","ghdost")
       }
       //if()
       

@@ -1,3 +1,4 @@
+const Discord = require ("discord.js")
 module.exports = {
 name:"guilds",
 desc: "veja em quantos servidores eu estou",
@@ -7,5 +8,11 @@ aliases:["servers"],
 run:run
 }
 async function run(client,message,args){
- message.channel.send(`estou em ${client.guilds.cache.size} servers!`)
+  const embed = new Discord.MessageEmbed()
+    .setColor('0edceb')
+    .setTitle('Servidores')
+    .setDescription(`Estou em ${client.guilds.cache.size} servidores uhuuuuu!`)
+    .setTimestamp()
+    .setFooter(`Comando executado por ${message.author.username}`, message.author.avatarURL());
+ message.channel.send(embed)
 }
