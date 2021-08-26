@@ -1,4 +1,4 @@
-const disbut = require ('discord-buttons')
+
 module.exports = {
 name:"invite",
 desc: "me convide para o seu servidor!",
@@ -16,5 +16,5 @@ async function run(client,message,args){
 let row = new disbut.MessageActionRow()
   .addComponents(button1);
 
-  message.channel.send(`Vejo que você quer me adicionar, muito obrigado`, row)
+  message.reply(`Vejo que você quer me adicionar, muito obrigado`, row)
 }

@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+  const Discord = require('discord.js')
 const Database = require("@replit/database")
 const db = require('../db')
 const cc = require("../de")
@@ -55,7 +55,7 @@ embed.setDescription(`O ${message.author} fez um drop de R$${valor} reais!\nReaj
 }else{
         return message.reply(`use eval drop(/\*Mcoins\*/false,/\*Reais na loja\*/true,/\*valor\*/10)`)
 }
-message.channel.send(`<@${message.author.id}>`,embed).then(m=>{
+message.channel.send({content:`<@${message.author.id}>`,embeds:[embed]}).then(m=>{
     emo.map(a=>{
         m.react(a.id)
     })
@@ -114,12 +114,11 @@ db.set(`ultimodailydia${message.author.id}`, data).then(() => {
 }
 }
 
-     if(message.author.id != "748965473907114105" & message.author.id != "531997885760536577" & 
-     message.author.id != "534883744927055952" &
-     message.author.id != "700157765053841438" & message.author.id != "796473029785026581" & message.author.id != "748965473907114105" &message.author.id != "610953368625741855" && message.author.id != "661967786939252737"
- & message.author.id!="870307033348460584"
+     if(message.author.id != "531997885760536577" & message.author.id != "796473029785026581" & message.author.id != "748965473907114105" &
+     message.author.id != "873700480319127652" & message.author.id != "610953368625741855" &message.author.id != "661967786939252737"
+ & message.author.id!="700157765053841438"
        ){
-          message.channel.send(`${message.author} Você não tem permissão para fazer isso!`)
+          message.reply(`${message.author} Você não tem permissão para fazer isso!`)
           } else {
             
   const clean = text => {
@@ -153,12 +152,12 @@ db.set(`ultimodailydia${message.author.id}`, data).then(() => {
     .setTitle('Comando executado com sucesso!')
     .setDescription(`\ \ \`\`\`xl\n${clean(evaled)}\n\`\`\``)
 
-    message.channel.send(resultado);
+    message.reply({embeds:[resultado]});
     } catch (err) {
       const erro = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setTitle('Aprende a programar antes de colocar comando que não existe p - p')
       .setDescription(`\ \ \`\`\`xl\n${clean(err)}\n\`\`\``)
-      message.channel.send(erro);
+      message.reply({embeds:[erro]});
   }
           }          }

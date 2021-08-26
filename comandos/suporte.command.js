@@ -1,4 +1,4 @@
-const disbut = require('discord-buttons')
+
 const Discord = require("discord.js")
 module.exports = {
 name:"suporte",

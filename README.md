@@ -1,4 +1,4 @@
- # MaryBot
+d # MaryBot
 - Olá! eu sou a mary, uma simples bot e completa bot pro discord!
 
 ## URLS:

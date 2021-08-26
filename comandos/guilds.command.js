@@ -14,5 +14,5 @@ async function run(client,message,args){
     .setDescription(`Estou em ${client.guilds.cache.size} servidores uhuuuuu!`)
     .setTimestamp()
     .setFooter(`Comando executado por ${message.author.username}`, message.author.avatarURL());
- message.channel.send(embed)
+ message.reply(embed)
 }

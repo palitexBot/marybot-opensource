@@ -15,6 +15,6 @@ async function run(client,message,args){
         .setTitle(`Avatar do usuário: ${user.username}`)
         .setImage(user.avatarURL({dynamic: true, size: 2048}))
 
-        message.channel.send(embed)
+        message.channel.send({embeds:[embed]});
     }
 

@@ -1,4 +1,3 @@
-const disbut = require("discord-buttons")
 module.exports = {
 name:"ajuda",
 desc: "Comando que vai redirecionar para esse site!",
@@ -9,41 +8,21 @@ run:run
 }
 async function run(client,message,args){
   const Discord = require('discord.js')
-  const disbut = require('discord-buttons')
+
 const embed = new Discord.MessageEmbed()
     .setColor('0edceb')
     .setTitle('Ajuda')
     .setDescription('<:marypaimonduvida:869632662577504256> Devido as limitaçôes do Discord decidimos mover o ajuda para o site')
     .setTimestamp()
     .setFooter(`Comando executado por ${message.author.username}`, message.author.avatarURL());
-        let button1 = new disbut.MessageButton()
-  .setStyle('url')
-  .setURL('https://mary.blacklight.net.br/comandos.mcat') 
-  .setLabel('Comandos🤖'); 
-  let button2 = new disbut.MessageButton()
-  .setStyle('url')
-  .setURL('enc.blacklight.net.br/mw') 
-  .setLabel('Meu site!'); 
+        
+  
+let row = new Discord.MessageActionRow().addComponents(
+new Discord.MessageButton()
+.setURL('https://mary.blacklight.net.br/comandos.mcat')
+.setStyle('LINK')
+.setLabel('Meus comandos')
+)
 
-  let button3 = new disbut.MessageButton()
-  .setStyle('url')
-  .setURL('https://mary.blacklight.net.br/api/vote') 
-  .setLabel('Vote em mim✔'); 
-let button4 = new disbut.MessageButton()
-  .setStyle('url')// eu sei
-  //o style é oq ele é, n tem id
-  .setURL('https://mary.blacklight.net.br/api/suporte') 
-  .setLabel('Suporte❓'); 
-
-  let button5 = new disbut.MessageButton()
-  .setStyle('url')// eu sei
-  //o style é oq ele é, n tem id
-  .setURL('https://mary.blacklight.net.br/api/invite') 
-  .setLabel('Me adicone💎'); 
- 
-let row = new disbut.MessageActionRow()
-  .addComponents(button1, button2, button3 ,button4, button5);
-
-
-message.channel.send(embed, row);
+message.channel.send({ embeds: [embed], components: [row] })
 }

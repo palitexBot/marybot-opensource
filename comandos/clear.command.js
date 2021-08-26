@@ -9,8 +9,8 @@ aliases:["limpar","clean"],
 run:run
 }
 async function run(client,message,args){
-        if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send(`Você não tem a permissão  \`Gerenciar Mensagens\` para executar este comando.`)
-        if(!message.guild.me.hasPermission('MANAGE_MESSAGES')) return message.channel.send(`Eu não tenho a permissão \`Gerenciar Mensagens\` para executar este comando.`)
+        if(!message.member.permissions.has('MANAGE_MESSAGES')) return message.channel.send(`Você não tem a permissão  \`Gerenciar Mensagens\` para executar este comando.`)
+        if(!message.guild.me.permissions.has('MANAGE_MESSAGES')) return message.channel.send(`Eu não tenho a permissão \`Gerenciar Mensagens\` para executar este comando.`)
         if(!args[0]) return message.channel.send(`Coloque um número.`)
         if(isNaN(args[0])) return message.channel.send(`Coloque um número válido.`)
         try{
