@@ -2,7 +2,10 @@ const Discord = require('discord.js')
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS", "GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "GUILD_WEBHOOKS"]})
 const fs = require('fs')
 const db = require('./db')
+<<<<<<< Updated upstream
 const uptime = require('./ligar')
+=======
+>>>>>>> Stashed changes
 client.login(process.env.TOKEN)
 client.commands = new Discord.Collection()
 client.db = db
