@@ -10,13 +10,8 @@ d # MaryBot
 - olha que legal! Você tendo sua própia mary!
 - no seu .env bote:
 <p>TOKEN=(token da sua bot)</p>
-<<<<<<< Updated upstream
 - e bote as configs da firebase que você consegue em: https://console.firebase.google.com
 
 
 #### Alerta:
 - O Dono do github é o doutor estranho mas o criador é o [C0dezin](https://github.com/C0dezin)
-=======
-e configure o banco de dados (MySQL)[https://www.luiztools.com.br/post/como-usar-nodejs-mysql/]
-
->>>>>>> Stashed changes

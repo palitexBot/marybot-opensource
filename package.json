@@ -23,6 +23,7 @@
     "firebase": "^8.8.0",
     "jimp": "^0.16.1",
     "moment": "^2.29.1",
+    "mongoose": "^6.0.1",
     "mysql2": "^2.3.0",
     "node-fetch": "^2.6.1",
     "numero-por-extenso": "^1.0.8",

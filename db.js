@@ -11,6 +11,9 @@ async function connect(){
       },cooldown*1000)
 let env = process.env
     const mysql = require("mysql2/promise");
+    if(global.connection){
+      global.connection.close()
+    }
     const connection = await mysql.createConnection("mysql://"+env.mysql_name+":"+env.mysql_pass+"@"+env.mysql_host+":"+env.mysql_port+"/"+env.mysql_name+"");
     console.log("Conectou no MySQL!");
     
@@ -58,7 +61,9 @@ async function createUser(member){
   let data = new Date();
 let ts = data.getTime();
   let sql = "INSERT INTO members(id,iniciomary) VALUES(?,?)"
-  let aaa = connection.query(sql,[id,String(ts)])
+  let sql2 = "INSERT INTO badges(userid) VALUES(?)"
+  let aaa = await connection.query(sql,[id,ts])
+let aaaa = await connection.query(sql2,[id])
   return true;
 }
 async function getSaldo(member){
@@ -76,6 +81,13 @@ async function getSaldo(member){
 return await saldo;
 }
 async function perfilMember(member){
-  
+  let {id} = member;
+  let sql = "SELECT * FROM members WHERE id=?";
+  let vars = [id];
+  let connection = await connect();
+  let query = await connection.query(sql,vars)
+  let [rows] = query[0];
+  if(!rows) return;
+  return rows;
 }
-module.exports = {guildAdd:serverAdd,guildDelete,getServerPrefix,verifyUser,createUser,getSaldo}
+module.exports = {guildAdd:serverAdd,guildDelete,getServerPrefix,verifyUser,createUser,getSaldo,perfilMember}

@@ -17,7 +17,9 @@ async function run(client,message,args){
     if(user.id == message.author.id){
       message.lol = `${emojo}|${message.author} você tem ${a} mcoins!`
     } else{
+      
       message.lol=`${emojo}| ${message.author} ${user} tem ${a} mcoins!`
+      if(user.id == "880170162765045841" ) message.lol = `${emojo}|MaryDev tem ∞ mcoins!`
     }
     message.reply(message.lol)
   }
