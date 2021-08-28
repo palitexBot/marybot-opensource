@@ -8,11 +8,12 @@ module.exports = {
 async function run(client,message,args){
  const Jimp = require('jimp')
  
-   const db = client.db;
+   /*const db = client.db;
   const user = message.mentions.users.first() || client.users.cache.find(user => user.username == args[0]) || client.users.cache.get(args[0]) || message.author;
   const info = await db.perfilMember(user);
   if(!info) return message.reply("Perfil não existe");
  // console.dir(info)
+ 
  Jimp.read('./imgs/perfil.png', (err, Perfil) => {
    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
   if (err) throw err;
