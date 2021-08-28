@@ -1,5 +1,5 @@
 # MaryBot
-- Olá! eu sou a mary, uma simples bot e completa bot pro discord!
+- Olá! eu sou a mary, uma simples bot e completa bot pro discord
 
 ## URLS:
 [loja](https://loja.blacklight.net.br)  [site](https://mary.blacklight.net.br) [discord](https://loja.blacklight.net.br/discord)
