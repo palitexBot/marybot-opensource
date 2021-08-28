@@ -7,60 +7,52 @@ module.exports = {
 }
 async function run(client,message,args){
  const Canvas = require('canvas')
- 
-   /*
+
    const db = client.db;
   const user = message.mentions.users.first() || client.users.cache.find(user => user.username == args[0]) || client.users.cache.get(args[0]) || message.author;
   const info = await db.perfilMember(user);
   if(!info) return message.reply("Perfil não existe");
- // console.dir(info)
- */
+
+
 
 const canvas = Canvas.createCanvas(700, 250);
 		const context = canvas.getContext('2d');
 
-    const contextw = canvas.getContext('2d');
+    const applyText = (canvas, text) => {
+      
+	const context = canvas.getContext('2d');
+	let fontSize = 70;
 
-	// Since the image takes time to load, you should await it
-	const background = await Canvas.loadImage('./imgs/perfil.png');
+	do {
+		context.font = `${fontSize -= 10}px sans-serif`;
+	} while (context.measureText(text).width > canvas.width - 300);
 
-	// This uses the canvas dimensions to stretch the image onto the entire canvas
-	context.drawImage(background, 0, 0, canvas.width, canvas.height);
-const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'jpg' }));
+	return context.font;
+};
 
-context.drawImage(avatar, 25, 25, 200, 200);
+		const background = await Canvas.loadImage('./imgs/perfil.png');
+		context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-context.beginPath();
+		context.strokeStyle = '#0099ff';
+		context.strokeRect(0, 0, canvas.width, canvas.height);
 
-	// Start the arc to form a circle
-	context.arc(125, 125, 100, 0, Math.PI * 2, true);
+		context.font = '28px sans-serif';
+		context.fillStyle = '#ffffff';
+		context.fillText('Profile', canvas.width / 2.5, canvas.height / 3.5);
 
-	// Put the pen down
-	context.closePath();
+		context.font = applyText(canvas, `${user.tag}!`);
+		context.fillStyle = '#ffffff';
+		context.fillText(`${user.tag}!`, canvas.width / 2.5, canvas.height / 1.8);
 
-	// Clip off the region you drew on
-	context.clip();
+		context.beginPath();
+		context.arc(125, 125, 100, 0, Math.PI * 2, true);
+		context.closePath();
+		context.clip();
 
-  context.font = '60px sans-serif';
+		const avatar = await Canvas.loadImage(user.displayAvatarURL({ format: 'jpg' }));
+		context.drawImage(avatar, 25, 25, 200, 200);
 
-	// Select the style that will be used to fill the text in
-	context.fillStyle = '#ffffff';
+		const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'perfil.png');
 
-	// Actually fill the text with a solid color
-	context.fillText(interaction.member.displayName, canvas.width / 2.5, canvas.height / 1.8);
-
-	const attachment = new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
-
-
-   const embed = new Discord.MessageEmbed()
-    .setColor('0edceb')
-    .setTitle('Seu perfil')
-    .setDescription(`Olá ${message.author.username}, aqui está\n`)
-    
-.addField('Entrou para a mary em', `<t:${Number(info.iniciomary/1000).toFixed(0)}:R>`)
-    
-.addField('Badges', 'teste')
-    .setFooter(`${message.author.username}`, message.author.avatarURL());
-
-    message.reply({file})
-}// n fiz o perfilMember ent vai ter chance de n funcionar
+		message.reply({content: "Caso esteja procurando mais informações use o comando m.webperfil!", files: [attachment] });
+}
