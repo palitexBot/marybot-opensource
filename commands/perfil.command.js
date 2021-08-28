@@ -6,24 +6,51 @@ module.exports = {
   run:run
 }
 async function run(client,message,args){
- const Jimp = require('jimp')
+ const Canvas = require('canvas')
  
-   /*const db = client.db;
+   /*
+   const db = client.db;
   const user = message.mentions.users.first() || client.users.cache.find(user => user.username == args[0]) || client.users.cache.get(args[0]) || message.author;
   const info = await db.perfilMember(user);
   if(!info) return message.reply("Perfil não existe");
  // console.dir(info)
- 
- Jimp.read('./imgs/perfil.png', (err, Perfil) => {
-   Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
-  if (err) throw err;
-  Perfil
-    .resize(256, 256) // resize
-    .quality(60) // set JPEG quality
-    .greyscale() // set greyscale
-    image.print(font, 10, 10, user.username);
-   })
-});
+ */
+
+const canvas = Canvas.createCanvas(700, 250);
+		const context = canvas.getContext('2d');
+
+    const contextw = canvas.getContext('2d');
+
+	// Since the image takes time to load, you should await it
+	const background = await Canvas.loadImage('./imgs/perfil.png');
+
+	// This uses the canvas dimensions to stretch the image onto the entire canvas
+	context.drawImage(background, 0, 0, canvas.width, canvas.height);
+const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'jpg' }));
+
+context.drawImage(avatar, 25, 25, 200, 200);
+
+context.beginPath();
+
+	// Start the arc to form a circle
+	context.arc(125, 125, 100, 0, Math.PI * 2, true);
+
+	// Put the pen down
+	context.closePath();
+
+	// Clip off the region you drew on
+	context.clip();
+
+  context.font = '60px sans-serif';
+
+	// Select the style that will be used to fill the text in
+	context.fillStyle = '#ffffff';
+
+	// Actually fill the text with a solid color
+	context.fillText(interaction.member.displayName, canvas.width / 2.5, canvas.height / 1.8);
+
+	const attachment = new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
+
 
    const embed = new Discord.MessageEmbed()
     .setColor('0edceb')
@@ -35,5 +62,5 @@ async function run(client,message,args){
 .addField('Badges', 'teste')
     .setFooter(`${message.author.username}`, message.author.avatarURL());
 
-    message.reply({embeds: [embed]})
+    message.reply({file})
 }// n fiz o perfilMember ent vai ter chance de n funcionar

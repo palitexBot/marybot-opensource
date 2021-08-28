@@ -40,6 +40,7 @@ client.on("ready",()=>{
     .setDescription("AE CARA vê por favor se fiquei melhor?")
     .addField("Message",msg.message)
     .addField("Author:",msg.author.username)
+    .addField("Url:",`[aqui](${msg.url})`)
 let ojson = {embeds:[embed]}
 
   client.channels.cache.get("881213030954831882").send(ojson)
