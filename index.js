@@ -8,7 +8,7 @@ const app = express()
 app.listen(3000)
 client.login(process.env.TOKEN)
 client.commands = new Discord.Collection()
-
+//ok
 client.on("ready",(e)=>{
     if(e) return console.error("error: "+e)
     console.log(`A bot ${client.user.tag} está pronta!\n${client.guilds.cache.size} servers`)
