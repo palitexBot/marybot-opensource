@@ -3,6 +3,7 @@ const client = new Discord.Client({intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_B
 const fs = require('fs')
 const db = require('./db')
 const uptime = require('./ligar')
+const fetch = require('node-fetch')
 client.login(process.env.TOKEN)
 client.commands = new Discord.Collection()
 client.db = db
@@ -11,14 +12,37 @@ const blapi = require('blacklightapi')
 client.blapi = new blapi({
     token:process.env.api_oauth
 });
-
+console.dir(client.blapi)
 const express = require('express')
 const app = express()
+const bodyPaser =bodyParser = require('body-parser')
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
 client.on("ready",()=>{
   console.warn("Logada na Maryyyyyyyyyyyyyyyyyyyyyy!")
   client.user.setActivity(`m.ajuda`,{
     type:"STREAMING",
     url: "https://www.twitch.tv/c0desaas"
+  })
+  app.post("/git/atualizacao/:key",async(req,res)=>{
+    const verifysenha = require('./senhaverify')
+    
+    if(req.params.key != process.env.senhia) return res.json({cu:"r"})
+   let msg = req.body.head_commit;
+   
+    res.send(req.body)
+    let embed = new Discord.MessageEmbed()
+    .setTitle("Fui atualizadah")
+    .setDescription("AE CARA vê por favor se fiquei melhor?")
+    .addField("Message",msg.message)
+    .addField("Author:",msg.author.username)
+let ojson = {embeds:[embed]}
+
+  client.channels.cache.get("881213030954831882").send(ojson)
   })
     const cmd2 = fs.readdirSync(`./commands`).filter(go => go.endsWith('.js'));
      //  db.ref(`comandos`).set({})
@@ -45,10 +69,11 @@ app.get("/",(req,res)=>{
 
 client.on("messageCreate",async(message)=>{
   
-  if(await db.createUser(message.author)) return;
+ // if(await db.createUser(message.author)) return;
   if(message.author.bot) return;
  
   if(message.channel.type == "DM")return;
+ 
   const prefixo = await db.getServerPrefix(message.guild) || "m.";
   if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@${client.user.id}>`)) {
      if(await db.createUser(message.author)) return message.reply(`Olá ${message.author}! Bem vindo(a) na mary!\nPrefixo do server: ${prefixo}\nPrefixo global: m.\nAjuda: ${prefixo}ajuda`);
@@ -64,16 +89,25 @@ client.on("messageCreate",async(message)=>{
         }
         try{
           if(await db.createUser(message.author)) {
-            throw new Error("Parece que te conheci agora, já que se apresentou use o comando novamente, bipbop")
+            throw new Error("PERSONAERROR\nParece que te conheci agora, já que se apresentou use o comando novamente, bipbop")
           }
-          comando.run(client,message,args)
+          function erro(erro){
+           message.reply("Um erro Personalizado apareceu! \n```js\n"+erro+"```")
+          }
+          comando.run(client,message,args,erro)
           client.channels.cache.get('880812071728578620').send({content: `O comando **${cmd}** foi executado por **${message.author.username}** **(${message.author.id})** no servidor **${message.guild.name}**  **(${message.guild.id})** no canal ** ${message.channel.name} ** **(${message.channel.id}) ** com as info ** ${args.join(' ')} **`})
         } catch(e){
-          client.channels.cache.get('880812155291705395').send({content: `ocorreu um erro no comando ${cmd} veja se não há bugs!`})
-          message.reply(`<:marypaimonduvida:869632662577504256>| ${message.author}, algum erro aconteceu no comando ${cmd} pode ser erro do codigo ou meu erro!\nErro:\n\`\`\`js\n${e}\n\`\`\``)
+          e=String(e).replace("Error: ","")
+          if(String(e).startsWith("PERSONAERROR\n")){}else{
+          client.channels.cache.get('880812155291705395').send({content: `ocorreu um erro no comando ${cmd} veja se não há bugs!\nErro:\n\`\`\`js\n${e}\n\`\`\``})
+          }
+          message.reply(`<:marypaimonduvida:869632662577504256>| ${message.author}, algum erro aconteceu no comando ${cmd} pode ser erro do codigo ou meu erro\n se começar com PERSONAERROR verifique a sintaxe correta do comando!!\nErro:\n\`\`\`js\n${e}\n\`\`\``)
         }
   }
 })
+
+
+
 client.on("guildCreate",s=>{
   db.guildAdd(s)
   client.channels.cache.get('880812058373947392').send({content: `Fui adicionada em uma guild **${s.name}**  **(${s.id})** `})

@@ -6,7 +6,8 @@ module.exports = {
   run:run
 }
 async function run(client,message,args){
-  
+message.reply('MANU!')
+}/*
 const row = new MessageActionRow()
 			.addComponents(
 				new MessageButton()
@@ -17,7 +18,7 @@ const row = new MessageActionRow()
 			);
 
 
-      const {blapi} = client
+      const { blapi } = client
   blapi.doggo().then(doguin=>{
     let url = doguin;
     let embed = new MessageEmbed()
@@ -33,11 +34,11 @@ if(interaction.member.guild.id != message.guild.id ||interaction.member.user.id 
 	if (!interaction.isButton()) return;
   await interaction.deferUpdate();
 		await wait(2000);
-     await interaction.delete
+    
 		await interaction.editReply({ embeds: [embed], components: [row]});
   
     })
   })
   
 
-}
+}*/
