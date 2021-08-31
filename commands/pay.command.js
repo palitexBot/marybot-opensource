@@ -1,4 +1,4 @@
-const {MessageEmbed}= require("discord.js")
+const { MessageEmbed }= require("discord.js")
 module.exports = {
   name:"pay",
   description:"Pague seu melhor amigo com mcoins!",
@@ -31,7 +31,20 @@ erro("O valor que tu quer tem que ser numero!")
     if(valor>=saldo){
       erro("você não pode pagar oque não tem bobinho!!")
     } else{
+      let saldoOutroMembro = await db.getSaldo(user)
+      let mensagem = "{member1}, {member} quer te pagar {mcoins} mcoins, se você aceitar clicando em Aceitar1 e o {member} clicar em Aceitar2 você ficará com {mcoins.totality} mcoins! e {member} com {member.mcoins} mcoins\nLEMBRANDO: o {member} e {member1} precisam pegar o daily(m.daily) pra pagar!\nLeia as regras em: https://mary.blacklight.net.br/terms"
+      saldo=await db.getSaldo(message.author)
+      for(let i = 0;i<=1000;i++){
+        mensagem=mensagem.replace("{member1}",user)
+        mensagem=mensagem.replace("{member}",message.author)
+        mensagem=mensagem.replace("{mcoins}",valor)
+        mensagem=mensagem.replace("{mcoins.totality}",saldoOutroMembro+valorr)
+        mensagem=mensagem.replace("{member.mcoins}",saldo-valor)
       
+      }
+      message.reply({
+        content:mensagem
+      })
     }
     }
   }

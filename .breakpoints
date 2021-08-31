@@ -8,18 +8,26 @@
         "index": 722
       }
     ],
+    "commands/snake.command.js": [
+      {
+        "id": "67e762b2-0662-485d-887b-7ccb40818914",
+        "line": 1,
+        "version": 1531,
+        "index": 0
+      }
+    ],
     "index.js": [
       {
         "id": "3e686172-cf05-4855-8cb8-68fa1f6a089a",
-        "line": 6,
-        "version": 44073,
-        "index": 346
+        "line": 40,
+        "version": 46029,
+        "index": 322
       },
       {
         "id": "702353bc-b307-4422-b2ce-8dfe38c7d922",
-        "line": 60,
-        "version": 45612,
-        "index": 1975
+        "line": 57,
+        "version": 46029,
+        "index": 1914
       }
     ]
   }

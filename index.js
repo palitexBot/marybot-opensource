@@ -1,7 +1,10 @@
 const Discord = require('discord.js')
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS", "GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "GUILD_WEBHOOKS"]})
+const { DiscordTogether } = require('discord-together');
 const fs = require('fs')
 const db = require('./db')
+var cors = require('cors')
+client.discordTogether = new DiscordTogether(client);
 const uptime = require('./ligar')
 const fetch = require('node-fetch')
 client.login(process.env.TOKEN)
@@ -15,10 +18,12 @@ client.blapi = new blapi({
 console.dir(client.blapi)
 const express = require('express')
 const app = express()
-const bodyPaser =bodyParser = require('body-parser')
+app.use(cors())
+const bodyPaser = bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 client.on("ready",()=>{
+
   console.warn("Logada na Maryyyyyyyyyyyyyyyyyyyyyy!")
   client.user.setActivity(`m.ajuda`,{
     type:"STREAMING",
@@ -56,7 +61,7 @@ app.get("/",(req,res)=>{
 
         const CMDs = require(`./commands/${file}`);
       client.commands.set(CMDs.name, CMDs);
-     // console.log(`Comando ${CMDs.name} carregado 👍`)
+      console.log(`Comando ${CMDs.name} carregado 👍 ${file}`)
 
      }
      console.log("Todos os cmds foram carregados!")
@@ -89,10 +94,12 @@ client.on("messageCreate",async(message)=>{
             throw new Error("PERSONAERROR\nParece que te conheci agora, já que se apresentou use o comando novamente, bipbop")
           }
           function erro(erro){
-           message.reply("Um erro Personalizado apareceu! \n```js\n"+erro+"```")
+           message.reply("Um errselvagemdo apareceu! \n```js\n"+erro+"```")
           }
+          
           comando.run(client,message,args,erro)
-          client.channels.cache.get('880812071728578620').send({content: `O comando **${cmd}** foi executado por **${message.author.username}** **(${message.author.id})** no servidor **${message.guild.name}**  **(${message.guild.id})** no canal ** ${message.channel.name} ** **(${message.channel.id}) ** com as info ** ${args.join(' ')} **`})
+               //    erro(message.content)                                                                            
+          client.channels.cache.get('880812071728578620').send({content: `O comando \`\`\`${cmd}\`\`\` foi executado por \`\`\`${message.author.username}\`\`\` \`\`\`(${message.author.id})** no servidor \`\`\`${message.guild.name}\`\`\`  \`\`\`(${message.guild.id})\`\`\` no canal \`\`\`${message.channel.name}\`\`\` \`\`\`(${message.channel.id})\`\`\` com as info \`\`\`${args.join(' ')}\`\`\``})
         } catch(e){
           e=String(e).replace("Error: ","")
           if(String(e).startsWith("PERSONAERROR\n")){}else{

@@ -14,45 +14,19 @@ async function run(client,message,args){
   if(!info) return message.reply("Perfil não existe");
 
 
+const Jimp = require('jimp')
+const foto = await Jimp.read(user.avatarURL({format:"png"})||"https://cdn.discordapp.com/embed/avatars/2.png?size=2048")
+Jimp.read(`./imgs/perfil.png`).then(async i => {
+                Jimp.loadFont(Jimp.FONT_SANS_32_WHITE).then(async font => {
+                 foto.resize(100,100)
+                i.print(font, 10,10, `${user.username}`, 263)
+                const final = await i.getBufferAsync(Jimp.MIME_PNG)
+                i.composite(foto,10,30)
+                const attachment = new Discord.MessageAttachment(final, `User${user.id}Profile${user.tag}.png`)
+                const aa = attachment.attachment
 
-const canvas = Canvas.createCanvas(700, 250);
-		const context = canvas.getContext('2d');
 
-    const applyText = (canvas, text) => {
-      
-	const context = canvas.getContext('2d');
-	let fontSize = 70;
-
-	do {
-		context.font = `${fontSize -= 10}px sans-serif`;
-	} while (context.measureText(text).width > canvas.width - 300);
-
-	return context.font;
-};
-
-		const background = await Canvas.loadImage('./imgs/perfil.png');
-		context.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-		context.strokeStyle = '#0099ff';
-		context.strokeRect(0, 0, canvas.width, canvas.height);
-
-		context.font = '28px sans-serif';
-		context.fillStyle = '#ffffff';
-		context.fillText('Profile', canvas.width / 2.5, canvas.height / 3.5);
-
-		context.font = applyText(canvas, `${user.tag}!`);
-		context.fillStyle = '#ffffff';
-		context.fillText(`${user.tag}!`, canvas.width / 2.5, canvas.height / 1.8);
-
-		context.beginPath();
-		context.arc(125, 125, 100, 0, Math.PI * 2, true);
-		context.closePath();
-		context.clip();
-
-		const avatar = await Canvas.loadImage(user.displayAvatarURL({ format: 'jpg' }));
-		context.drawImage(avatar, 25, 25, 200, 200);
-
-		const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'perfil.png');
-
-		message.reply({content: "Caso esteja procurando mais informações use o comando m.webperfil!", files: [attachment] });
+		message.reply({content: `Caso esteja procurando mais informações use o comando m.webperfil ${user}`, files: [attachment] });
+})
+})
 }

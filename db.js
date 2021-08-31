@@ -22,6 +22,23 @@ let env = process.env
     
 }
 connect()
+async function daily(member){
+  let id = member.id;
+  const connection = await connect();
+  let sql = "SELECT * FROM members WHERE id=?";
+    let a = await connection.query(sql,[id])
+let b = a[0];
+const data = new Date();
+const dia = data.getDate();
+const mes = data.getMonth();
+
+let membro = b[0]
+if(membro.ultimodailydia == dia && membro.ultimodailymes == mes) {
+  return true
+}else{
+  return false
+}
+}
 async function serverAdd(server){
   let id = server.id
   let sql =  "INSERT INTO guilds(id) VALUES (?)"
@@ -90,4 +107,4 @@ async function perfilMember(member){
   if(!rows) return;
   return rows;
 }
-module.exports = {guildAdd:serverAdd,guildDelete,getServerPrefix,verifyUser,createUser,getSaldo,perfilMember}
+module.exports = {guildAdd:serverAdd,guildDelete,getServerPrefix,verifyUser,createUser,getSaldo,perfilMember,daily}

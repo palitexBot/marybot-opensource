@@ -9,7 +9,13 @@ async function run(client,message,args){
 const embed = new Discord.MessageEmbed()
     .setColor('0edceb')
     .setTitle('Meus comandos')
-    .setDescription('Aqui está \ndoggo \nsaldo \nteste')
+    .setDescription(`Aqui está:\n${
+
+
+client.commands.map(e=>`${e.name}\n`).join(" ")
+
+
+    }`)
     .setTimestamp()
     .setFooter(`${message.author.username}`, message.author.avatarURL());
     
