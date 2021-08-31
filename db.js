@@ -2,7 +2,7 @@ let cooldown = 60;
 let set = new Set()
 let nome = "aaaaa"
 async function connect(){
-
+//
     if(set.has(nome))
         return global.connection;
         set.add(nome)
